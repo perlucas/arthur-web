@@ -1,0 +1,35 @@
+{
+  "home": {
+    "title": "Inicio"
+  },
+  "chipsInput": {
+    "placeholder": "Escribe y presiona Enter o coma"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "yourJobSearches": "Tus Búsquedas",
+    "manageCampaigns": "Gestiona y monitorea tus búsquedas de empleo activas",
+    "newSearch": "Nueva Búsqueda",
+    "updated": "Actualizado",
+    "active": "Activa",
+    "paused": "En pausa",
+    "monitoring": "Monitoreando",
+    "results": "resultados",
+    "viewResults": "Ver Resultados",
+    "noSearchesYet": "Aún no hay búsquedas de empleo",
+    "createFirstSearch": "Crea tu primera búsqueda de empleo para empezar a encontrar oportunidades",
+    "createJobSearch": "Crear Búsqueda"
+  },
+  "sidebar": {
+    "jobSearches": "Búsquedas",
+    "notifications": "Notificaciones",
+    "payments": "Pagos",
+    "brandName": "Arthur"
+  },
+  "toolbar": {
+    "userAvatarAlt": "Avatar de usuario",
+    "accountSettings": "Configuración",
+    "payments": "Pagos",
+    "signOut": "Cerrar sesión"
+  }
+}

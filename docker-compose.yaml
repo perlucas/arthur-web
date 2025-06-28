@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+    user: "root"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/home/app
+      - frontend_modules:/home/app/node_modules
+    ports:
+      - "3000:3000"
+    tty: true
+    command: "/bin/sh"
+
+volumes:
+  frontend_modules:
