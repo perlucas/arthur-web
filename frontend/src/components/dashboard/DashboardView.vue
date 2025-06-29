@@ -3,78 +3,123 @@
   import { ref } from 'vue';
   import SearchModal from './SearchModal.vue';
   import { formatDistanceToNow } from 'date-fns';
+  import { useRouter } from 'vue-router';
+  import { useI18n } from 'vue-i18n';
+
+  const router = useRouter();
+
+  const { t } = useI18n();
 
   const jobSearches = ref([
     {
       id: 1,
-      title: 'Senior Frontend Developer',
-      lastUpdated: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+      name: 'Senior Frontend Developer',
+      lastUpdated: new Date(Date.now() - 2 * 60 * 60 * 1000),
       isActive: true,
       resultsCount: 24,
       location: 'San Francisco, CA',
+      includeTitleTerms: ['Senior', 'Frontend', 'Developer'],
+      excludeTitleTerms: [],
+      includeKeywords: ['React', 'Vue'],
+      excludeKeywords: ['Angular'],
+      emailNotifications: true,
     },
     {
       id: 2,
-      title: 'React Developer Remote',
-      lastUpdated: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
+      name: 'React Developer Remote',
+      lastUpdated: new Date(Date.now() - 24 * 60 * 60 * 1000),
       isActive: true,
       resultsCount: 18,
       location: 'Remote',
+      includeTitleTerms: ['React', 'Developer'],
+      excludeTitleTerms: ['Manager'],
+      includeKeywords: ['TypeScript', 'Next.js'],
+      excludeKeywords: [],
+      emailNotifications: true,
     },
     {
       id: 3,
-      title: 'UI/UX Designer',
-      lastUpdated: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
+      name: 'UI/UX Designer',
+      lastUpdated: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
       isActive: false,
       resultsCount: 12,
       location: 'New York, NY',
+      includeTitleTerms: ['UI/UX', 'Designer'],
+      excludeTitleTerms: [],
+      includeKeywords: ['Figma', 'Sketch'],
+      excludeKeywords: [],
+      emailNotifications: false,
     },
     {
       id: 4,
-      title: 'Full Stack Engineer',
-      lastUpdated: new Date(Date.now() - 5 * 60 * 60 * 1000), // 5 hours ago
+      name: 'Full Stack Engineer',
+      lastUpdated: new Date(Date.now() - 5 * 60 * 60 * 1000),
       isActive: true,
       resultsCount: 31,
       location: 'Austin, TX',
+      includeTitleTerms: ['Full Stack', 'Engineer'],
+      excludeTitleTerms: [],
+      includeKeywords: ['Node.js', 'Python', 'AWS'],
+      excludeKeywords: [],
+      emailNotifications: true,
     },
     {
       id: 5,
-      title: 'Product Manager',
-      lastUpdated: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 1 week ago
+      name: 'Product Manager',
+      lastUpdated: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
       isActive: false,
       resultsCount: 8,
       location: 'Seattle, WA',
+      includeTitleTerms: ['Product Manager'],
+      excludeTitleTerms: [],
+      includeKeywords: ['Agile', 'Scrum'],
+      excludeKeywords: [],
+      emailNotifications: false,
     },
     {
       id: 6,
-      title: 'DevOps Engineer',
-      lastUpdated: new Date(Date.now() - 6 * 60 * 60 * 1000), // 6 hours ago
+      name: 'DevOps Engineer',
+      lastUpdated: new Date(Date.now() - 6 * 60 * 60 * 1000),
       isActive: true,
       resultsCount: 15,
       location: 'Denver, CO',
+      includeTitleTerms: ['DevOps', 'Engineer'],
+      excludeTitleTerms: [],
+      includeKeywords: ['Kubernetes', 'Docker', 'CI/CD'],
+      excludeKeywords: [],
+      emailNotifications: true,
     },
   ]);
+
+  const editingSearchId = ref(null);
 
   const toggleSearch = (searchId) => {
     const search = jobSearches.value.find((s) => s.id === searchId);
     if (search) {
-      console.log(`Job search "${search.title}" ${search.isActive ? 'activated' : 'paused'}`);
+      console.log(`Job search "${search.name}" ${search.isActive ? 'activated' : 'paused'}`);
     }
+  };
+
+  const onViewSearchResults = (search) => {
+    router.push(`/show-results/${search.id}`);
   };
 
   const searchModalVisible = ref(false);
   const searchModalMode = ref('create');
   const searchModalInitialData = ref(null);
 
-  const onModalOpen = () => {
+  const onCreateSearch = () => {
     searchModalMode.value = 'create';
     searchModalInitialData.value = null;
+    editingSearchId.value = null;
     searchModalVisible.value = true;
   };
 
-  const onSearchEdit = (search) => {
+  const onEditSearch = (search) => {
     searchModalMode.value = 'edit';
-    searchModalInitialData.value = { ...search }; // Pass a copy of the search object
+    editingSearchId.value = search.id;
+    const { id: _id, lastUpdated: _lastUpdated, resultsCount: _resultsCount, ...formData } = search;
+    searchModalInitialData.value = formData;
     searchModalVisible.value = true;
   };
 
@@ -83,22 +128,29 @@
     console.log('Search created:', newSearch);
   };
 
-  const handleSearchSaved = (updatedSearch) => {
-    const index = jobSearches.value.findIndex((s) => s.id === updatedSearch.id);
+  const handleSearchSaved = (updatedSearchData) => {
+    const index = jobSearches.value.findIndex((s) => s.id === editingSearchId.value);
     if (index !== -1) {
-      jobSearches.value[index] = updatedSearch;
+      jobSearches.value[index] = {
+        ...jobSearches.value[index],
+        ...updatedSearchData,
+        lastUpdated: new Date(),
+      };
+      console.log('Search saved:', jobSearches.value[index]);
     }
-    console.log('Search saved:', updatedSearch);
+    editingSearchId.value = null;
   };
 
-  const handleSearchDeleted = (deletedSearchId) => {
-    jobSearches.value = jobSearches.value.filter((s) => s.id !== deletedSearchId);
-    console.log('Search deleted:', deletedSearchId);
+  const handleSearchDeleted = () => {
+    if (editingSearchId.value === null) return;
+    jobSearches.value = jobSearches.value.filter((s) => s.id !== editingSearchId.value);
+    console.log('Search deleted:', editingSearchId.value);
+    editingSearchId.value = null;
   };
 </script>
 
 <template>
-  <layout title="Dashboard">
+  <layout :title="t('dashboard.title')">
     <!-- Dashboard Content -->
     <main class="p-6">
       <div class="mb-6">
@@ -109,7 +161,7 @@
           </div>
           <button
             class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center transition-colors duration-200"
-            @click="onModalOpen"
+            @click="onCreateSearch"
           >
             <i class="pi pi-plus mr-2" />
             {{ $t('dashboard.newSearch') }}
@@ -129,7 +181,7 @@
             <div class="flex items-start justify-between mb-4">
               <div class="flex-1">
                 <h3 class="text-lg font-semibold text-white mb-2">
-                  {{ search.title }}
+                  {{ search.name }}
                 </h3>
                 <div class="flex items-center text-sm text-gray-400">
                   <i class="pi pi-calendar mr-2" />
@@ -185,13 +237,14 @@
             <div class="flex space-x-2">
               <button
                 class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center justify-center"
+                @click="onViewSearchResults(search)"
               >
                 <i class="pi pi-eye mr-2" />
                 {{ $t('dashboard.viewResults') }}
               </button>
               <button
                 class="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-md transition-colors duration-200 cursor-pointer"
-                @click="onSearchEdit(search)"
+                @click="onEditSearch(search)"
               >
                 <i class="pi pi-cog" />
               </button>
@@ -210,7 +263,7 @@
           </p>
           <button
             class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
-            @click="onModalOpen"
+            @click="onCreateSearch"
           >
             {{ $t('dashboard.createJobSearch') }}
           </button>

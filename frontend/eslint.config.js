@@ -18,7 +18,7 @@ export default [
       'vue/singleline-html-element-content-newline': 'off',
       'vue/html-self-closing': 'off',
       'vue/max-attributes-per-line': 'off',
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_+' }],
+      'no-unused-vars': ['error', { varsIgnorePattern: '^_+', argsIgnorePattern: '^_+' }],
     },
   },
 ];

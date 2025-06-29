@@ -5,4 +5,4 @@ Arthur is a job search bot that automates searching and filtering job postings b
 ## Development
 
 Local development is done in a dedicated Docker container using Docker Compose. However, Podman is preferred as the container provider.
-Run commands for frontend via `podman compose exec frontend <command>`.
+Run commands for frontend via `podman compose exec frontend <command>`. Yarn is used over npm for managing dependencies and running commands.

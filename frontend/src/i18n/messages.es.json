@@ -31,5 +31,34 @@
     "accountSettings": "Configuración",
     "payments": "Pagos",
     "signOut": "Cerrar sesión"
+  },
+  "searchModal": {
+    "createTitle": "Crear Nueva Búsqueda",
+    "editTitle": "Editar Búsqueda",
+    "searchName": "Nombre",
+    "searchNamePlaceholder": "Ingresa un nombre para esta búsqueda",
+    "location": "Ubicación",
+    "locationPlaceholder": "Buscar una ubicación",
+    "jobTitle": "Título del Puesto",
+    "jobTitleTooltip": "Estos son los términos de búsqueda principales para buscar ofertas de empleo, incluye/excluye hasta 3 términos.",
+    "includeTitle": "Incluir estas palabras en el título",
+    "excludeTitle": "Excluir estas palabras del título",
+    "jobDescriptionKeywords": "Palabras clave en la descripción",
+    "jobDescriptionKeywordsTooltip": "Usa estos términos para hacer tu búsqueda más específica, incluyendo/excluyendo palabras clave de la descripción de la oferta.",
+    "includeKeywords": "Incluir estas palabras clave en la descripción",
+    "excludeKeywords": "Excluir estas palabras clave de la descripción",
+    "emailNotifications": "Enviar notificaciones por correo electrónico cuando se encuentren nuevos resultados",
+    "active": "Activa",
+    "paused": "En pausa",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "createSearch": "Crear Búsqueda",
+    "save": "Guardar",
+    "validation": {
+      "searchNameMin": "El nombre de la búsqueda debe tener al menos 3 caracteres",
+      "locationRequired": "La ubicación es requerida",
+      "locationInvalid": "Por favor selecciona una ubicación válida de la lista.",
+      "includeTitleTermsRequired": "Ingresa al menos un término de inclusión para el Título del puesto"
+    }
   }
 }

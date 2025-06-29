@@ -1,8 +1,12 @@
 <script setup>
   import { AutoComplete, Button, Checkbox, Dialog, InputText } from 'primevue';
   import { ref, reactive, watch } from 'vue';
+  import { useI18n } from 'vue-i18n';
   import { z } from 'zod';
   import ChipsInput from './ChipsInput.vue';
+
+  // i18n
+  const { t } = useI18n();
 
   // Model
   const visible = defineModel({ default: false, type: Boolean });
@@ -32,14 +36,14 @@
 
   // Form data
   const formData = reactive({
-    searchName: '',
+    name: '',
     includeTitleTerms: [],
     excludeTitleTerms: [],
     includeKeywords: [],
     excludeKeywords: [],
     location: '',
     emailNotifications: true,
-    isActive: true, // Include isActive for both modes, default to true for create
+    isActive: true,
   });
 
   // Form errors
@@ -55,7 +59,7 @@
         Object.assign(formData, initialData);
       } else {
         // Reset for 'create' mode or if initialData is null
-        formData.searchName = '';
+        formData.name = '';
         formData.includeTitleTerms = [];
         formData.excludeTitleTerms = [];
         formData.includeKeywords = [];
@@ -102,23 +106,23 @@
 
   // Validation schema
   const schema = z.object({
-    searchName: z.string().min(3, 'Search name must be at least 3 characters'),
+    name: z.string().min(3, t('searchModal.validation.searchNameMin')),
     location: z
       .string()
-      .min(1, 'Location is required')
+      .min(1, t('searchModal.validation.locationRequired'))
       .refine((val) => locations.includes(val), {
-        message: 'Please select a valid location from the list.',
+        message: t('searchModal.validation.locationInvalid'),
       }),
     includeTitleTerms: z
       .array(z.string())
-      .min(1, 'At least one include term is required for Job Title'),
+      .min(1, t('searchModal.validation.includeTitleTermsRequired')),
   });
 
   // Form validation
   const validateForm = () => {
     try {
       schema.parse({
-        searchName: formData.searchName,
+        name: formData.name,
         location: formData.location,
         includeTitleTerms: formData.includeTitleTerms,
       });
@@ -148,22 +152,14 @@
       if (props.mode === 'create') {
         const newSearch = {
           id: Date.now(),
-          title: formData.searchName,
+          ...formData,
           lastUpdated: new Date(),
-          isActive: true,
           resultsCount: 0,
-          location: formData.location,
-          jobType: 'Full-time', // Example default
-          sources: ['LinkedIn', 'Indeed'], // Example default
-          ...formData, // Spread current form data
         };
         emit('search-created', newSearch);
       } else {
         // mode === 'edit'
-        emit('search-saved', {
-          ...formData,
-          lastUpdated: new Date(), // Update last updated on save
-        });
+        emit('search-saved', { ...formData });
       }
       resetForm();
       closeModal();
@@ -176,7 +172,7 @@
 
   // Reset form
   const resetForm = () => {
-    formData.searchName = '';
+    formData.name = '';
     formData.includeTitleTerms = [];
     formData.excludeTitleTerms = [];
     formData.includeKeywords = [];
@@ -195,7 +191,7 @@
   };
 
   const deleteSearch = () => {
-    emit('search-deleted', props.initialData.id); // Emit ID of deleted search
+    emit('search-deleted');
     closeModal();
   };
 </script>
@@ -206,7 +202,7 @@
     :modal="true"
     :closable="true"
     :dismissable-mask="true"
-    :header="mode === 'create' ? 'Create New Job Search' : 'Edit Job Search'"
+    :header="mode === 'create' ? t('searchModal.createTitle') : t('searchModal.editTitle')"
     :style="{ width: '90%', maxWidth: '700px' }"
     class="custom-dialog"
     @update:visible="
@@ -221,31 +217,31 @@
         <!-- Search Name -->
         <div class="mb-6">
           <label for="searchName" class="block text-sm font-medium text-gray-300 mb-2">
-            Search Name <span class="text-red-500">*</span>
+            {{ t('searchModal.searchName') }} <span class="text-red-500">*</span>
           </label>
           <InputText
             id="searchName"
-            v-model="formData.searchName"
-            placeholder="Enter a name for this search"
+            v-model="formData.name"
+            :placeholder="t('searchModal.searchNamePlaceholder')"
             class="w-full"
-            :class="{ 'p-invalid': errors.searchName }"
+            :class="{ 'p-invalid': errors.name }"
           />
-          <small v-if="errors.searchName" class="p-error block mt-1">
-            {{ errors.searchName }}
+          <small v-if="errors.name" class="p-error block mt-1">
+            {{ errors.name }}
           </small>
         </div>
 
         <!-- Location Section -->
         <div class="mb-6">
           <label for="location" class="block text-sm font-medium text-gray-300 mb-2">
-            Location <span class="text-red-500">*</span>
+            {{ t('searchModal.location') }} <span class="text-red-500">*</span>
           </label>
           <AutoComplete
             id="location"
             v-model="formData.location"
             :suggestions="filteredLocations"
             @complete="searchLocation"
-            placeholder="Search for a location"
+            :placeholder="t('searchModal.locationPlaceholder')"
             class="w-full"
             input-class="w-full"
             :class="{ 'p-invalid': errors.location }"
@@ -258,18 +254,18 @@
         <!-- Title Section -->
         <div class="mb-6">
           <div class="flex items-center mb-4">
-            <h3 class="text-lg font-medium text-blue-400 mr-2">Job Title</h3>
+            <h3 class="text-lg font-medium text-blue-400 mr-2">
+              {{ t('searchModal.jobTitle') }}
+            </h3>
             <i
               class="pi pi-info-circle text-blue-300 cursor-pointer"
-              v-tooltip="
-                'These are the primary search terms used when looking up job postings, include/exclude up to 3 terms.'
-              "
+              v-tooltip="t('searchModal.jobTitleTooltip')"
             ></i>
           </div>
 
           <div class="mb-4">
             <label for="includeTitles" class="block text-sm font-medium text-gray-300 mb-2">
-              Include these words in the title <span class="text-red-500">*</span>
+              {{ t('searchModal.includeTitle') }} <span class="text-red-500">*</span>
             </label>
             <ChipsInput
               id="includeTitles"
@@ -286,7 +282,7 @@
 
           <div>
             <label for="excludeTitles" class="block text-sm font-medium text-gray-300 mb-2">
-              Exclude these words from the title
+              {{ t('searchModal.excludeTitle') }}
             </label>
             <ChipsInput
               id="excludeTitles"
@@ -302,18 +298,18 @@
         <!-- Keywords Section -->
         <div class="mb-6">
           <div class="flex items-center mb-4">
-            <h3 class="text-lg font-medium text-blue-400 mr-2">Job Description Keywords</h3>
+            <h3 class="text-lg font-medium text-blue-400 mr-2">
+              {{ t('searchModal.jobDescriptionKeywords') }}
+            </h3>
             <i
               class="pi pi-info-circle text-blue-300 cursor-pointer"
-              v-tooltip="
-                'Use these terms to make your search more specific by including/excluding keywords from the job posting\'s description'
-              "
+              v-tooltip="t('searchModal.jobDescriptionKeywordsTooltip')"
             ></i>
           </div>
 
           <div class="mb-4">
             <label for="includeKeywords" class="block text-sm font-medium text-gray-300 mb-2">
-              Include these keywords in the description
+              {{ t('searchModal.includeKeywords') }}
             </label>
             <ChipsInput
               id="includeKeywords"
@@ -327,7 +323,7 @@
 
           <div>
             <label for="excludeKeywords" class="block text-sm font-medium text-gray-300 mb-2">
-              Exclude these keywords from the description
+              {{ t('searchModal.excludeKeywords') }}
             </label>
             <ChipsInput
               id="excludeKeywords"
@@ -350,7 +346,7 @@
               class="mr-3"
             />
             <label for="notifications" class="text-sm font-medium text-gray-300 cursor-pointer">
-              Send email notifications when new results arrive
+              {{ t('searchModal.emailNotifications') }}
             </label>
           </div>
         </div>
@@ -363,7 +359,7 @@
           <!-- Status Switch -->
           <div v-if="mode === 'edit'" class="flex items-center mt-2">
             <span class="text-sm text-gray-400 mr-3">{{
-              formData.isActive ? 'Active' : 'Paused'
+              formData.isActive ? t('searchModal.active') : t('searchModal.paused')
             }}</span>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" v-model="formData.isActive" class="sr-only peer" />
@@ -376,7 +372,7 @@
           <div class="flex justify-end space-x-3">
             <Button
               type="button"
-              label="Cancel"
+              :label="t('searchModal.cancel')"
               @click="closeModal"
               severity="secondary"
               class="px-6 py-2"
@@ -384,14 +380,14 @@
             <Button
               v-if="mode === 'edit'"
               type="button"
-              label="Delete"
+              :label="t('searchModal.delete')"
               @click="deleteSearch"
               severity="danger"
               class="px-6 py-2"
             />
             <Button
               type="submit"
-              :label="mode === 'create' ? 'Create Search' : 'Save'"
+              :label="mode === 'create' ? t('searchModal.createSearch') : t('searchModal.save')"
               class="px-6 py-2"
               severity="primary"
               :loading="loading"

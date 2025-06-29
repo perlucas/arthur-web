@@ -31,5 +31,34 @@
     "accountSettings": "Account Settings",
     "payments": "Payments",
     "signOut": "Sign Out"
+  },
+  "searchModal": {
+    "createTitle": "Create New Job Search",
+    "editTitle": "Edit Job Search",
+    "searchName": "Search Name",
+    "searchNamePlaceholder": "Enter a name for this search",
+    "location": "Location",
+    "locationPlaceholder": "Search for a location",
+    "jobTitle": "Job Title",
+    "jobTitleTooltip": "These are the primary search terms used when looking up job postings, include/exclude up to 3 terms.",
+    "includeTitle": "Include these words in the title",
+    "excludeTitle": "Exclude these words from the title",
+    "jobDescriptionKeywords": "Job Description Keywords",
+    "jobDescriptionKeywordsTooltip": "Use these terms to make your search more specific by including/excluding keywords from the job posting's description",
+    "includeKeywords": "Include these keywords in the description",
+    "excludeKeywords": "Exclude these keywords from the description",
+    "emailNotifications": "Send email notifications when new results arrive",
+    "active": "Active",
+    "paused": "Paused",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "createSearch": "Create Search",
+    "save": "Save",
+    "validation": {
+      "searchNameMin": "Search name must be at least 3 characters",
+      "locationRequired": "Location is required",
+      "locationInvalid": "Please select a valid location from the list.",
+      "includeTitleTermsRequired": "At least one include term is required for Job Title"
+    }
   }
 }

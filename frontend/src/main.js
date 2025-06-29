@@ -94,6 +94,37 @@ const Noir = definePreset(Nora, {
         },
       },
     },
+    datatable: {
+      colorScheme: {
+        dark: {
+          header: {
+            cell: {
+              background: '{gray.800}',
+            },
+          },
+          row: {
+            background: '{gray.800}',
+            hoverBackground: '{gray.700}',
+          },
+          paginatorBottom: {
+            borderWidth: 0,
+          },
+        },
+      },
+    },
+    paginator: {
+      colorScheme: {
+        dark: {
+          root: {
+            background: '{gray.800}',
+          },
+          navButton: {
+            selectedBackground: '{gray.700}',
+            hoverBackground: '{gray.900}',
+          },
+        },
+      },
+    },
   },
 });
 
