@@ -60,5 +60,23 @@
       "locationInvalid": "Por favor selecciona una ubicación válida de la lista.",
       "includeTitleTermsRequired": "Ingresa al menos un término de inclusión para el Título del puesto"
     }
+  },
+  "previousResults": {
+    "title": "Resultados Anteriores",
+    "noResults": "No se encontraron resultados.",
+    "date": "Fecha",
+    "resultsCount": "# Resultados",
+    "download": "Descargar"
+  },
+  "searchResults": {
+    "title": "Resultados de Búsqueda",
+    "active": "Activo",
+    "paused": "En pausa",
+    "updated": "Actualizado",
+    "previousResults": "Resultados Anteriores",
+    "platform": "Plataforma",
+    "url": "URL",
+    "timestamp": "Fecha y Hora",
+    "noResultsMessage": "Esta búsqueda de empleo aún no tiene resultados. Las ofertas de trabajo que coincidan con tus criterios de búsqueda estarán disponibles en esta página pronto. Se te notificará cuando haya nuevos resultados disponibles."
   }
 }

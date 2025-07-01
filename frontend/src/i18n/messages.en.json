@@ -60,5 +60,23 @@
       "locationInvalid": "Please select a valid location from the list.",
       "includeTitleTermsRequired": "At least one include term is required for Job Title"
     }
+  },
+  "previousResults": {
+    "title": "Previous Results",
+    "noResults": "No previous results found.",
+    "date": "Date",
+    "resultsCount": "# Results",
+    "download": "Download"
+  },
+  "searchResults": {
+    "title": "Search Results",
+    "active": "Active",
+    "paused": "Paused",
+    "updated": "Updated",
+    "previousResults": "Previous Results",
+    "platform": "Platform",
+    "url": "URL",
+    "timestamp": "Timestamp",
+    "noResultsMessage": "This job search has no results yet. Job postings matching your search criteria will be available in this page soon. You will be notified when new results are available."
   }
 }

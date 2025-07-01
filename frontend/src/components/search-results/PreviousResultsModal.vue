@@ -5,8 +5,11 @@
   import Column from 'primevue/column';
   import Button from 'primevue/button';
   import ProgressSpinner from 'primevue/progressspinner';
-  import { formatDistanceToNow } from 'date-fns';
+  import { useI18n } from 'vue-i18n';
+  import { useDateFns } from '@/composables/useDateFns';
 
+  const { formatDistance, formatDate } = useDateFns();
+  const { t } = useI18n();
   const visible = defineModel({ default: false, type: Boolean });
 
   const { searchId } = defineProps({
@@ -45,31 +48,34 @@
       loading.value = false;
     }, 1500);
   });
-
-  const formatDate = (date) => {
-    return formatDistanceToNow(new Date(date), { addSuffix: true });
-  };
 </script>
 
 <template>
-  <Dialog v-model:visible="visible" modal header="Previous Results" :style="{ width: '50vw' }">
+  <Dialog
+    v-model:visible="visible"
+    modal
+    :header="t('previousResults.title')"
+    :style="{ width: '50vw' }"
+  >
     <div class="p-4">
       <div v-if="loading" class="flex justify-center items-center h-48">
         <ProgressSpinner />
       </div>
       <div v-else-if="previousResultFiles.length === 0">
-        <p>No previous results found.</p>
+        <p>{{ t('previousResults.noResults') }}</p>
       </div>
       <div v-else>
         <div class="rounded-lg bg-gray-800 shadow-lg p-2">
           <DataTable :value="previousResultFiles" class="p-datatable-sm">
-            <Column header="Date">
+            <Column :header="t('previousResults.date')">
               <template #body="slotProps">
-                {{ formatDate(slotProps.data.timestamp) }}
+                <div v-tooltip.left="formatDate(slotProps.data.timestamp)">
+                  {{ formatDistance(slotProps.data.timestamp) }}
+                </div>
               </template>
             </Column>
-            <Column field="resultsCount" header="# Results"></Column>
-            <Column header="Download">
+            <Column field="resultsCount" :header="t('previousResults.resultsCount')"></Column>
+            <Column :header="t('previousResults.download')">
               <template #body="slotProps">
                 <a :href="slotProps.data.csvUrl" download>
                   <Button icon="pi pi-download" class="p-button-rounded p-button-text" />

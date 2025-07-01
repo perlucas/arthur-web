@@ -2,13 +2,14 @@
   import Layout from '../layout/user/Layout.vue';
   import { ref } from 'vue';
   import SearchModal from './SearchModal.vue';
-  import { formatDistanceToNow } from 'date-fns';
   import { useRouter } from 'vue-router';
   import { useI18n } from 'vue-i18n';
+  import { useDateFns } from '@/composables/useDateFns';
 
   const router = useRouter();
 
   const { t } = useI18n();
+  const { formatDistance } = useDateFns();
 
   const jobSearches = ref([
     {
@@ -186,7 +187,7 @@
                 <div class="flex items-center text-sm text-gray-400">
                   <i class="pi pi-calendar mr-2" />
                   {{ $t('dashboard.updated') }}
-                  {{ formatDistanceToNow(search.lastUpdated, { addSuffix: true }) }}
+                  {{ formatDistance(search.lastUpdated) }}
                 </div>
               </div>
               <div class="flex items-center ml-4">

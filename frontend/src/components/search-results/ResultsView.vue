@@ -4,8 +4,12 @@
   import Layout from '../layout/user/Layout.vue';
   import DataTable from 'primevue/datatable';
   import Column from 'primevue/column';
-  import { format, formatDistanceToNow } from 'date-fns';
   import PreviousResultsModal from './PreviousResultsModal.vue';
+  import { useI18n } from 'vue-i18n';
+  import { useDateFns } from '@/composables/useDateFns';
+
+  const { t } = useI18n();
+  const { formatDistance, formatDate } = useDateFns();
 
   const router = useRouter();
   const route = useRoute();
@@ -61,14 +65,10 @@
   const onShowPreviousResults = () => {
     previousResultsModalVisible.value = true;
   };
-
-  const formatDate = (date) => {
-    return format(date, 'PPpp');
-  };
 </script>
 
 <template>
-  <Layout title="Search Results">
+  <Layout :title="t('searchResults.title')">
     <main class="p-6">
       <!-- Header -->
       <div class="flex items-center mb-6">
@@ -81,12 +81,13 @@
                 class="mr-2 h-3 w-3 rounded-full"
               ></div>
               <span :class="jobSearch.isActive ? 'text-green-400' : 'text-gray-400'">
-                {{ jobSearch.isActive ? 'Active' : 'Paused' }}
+                {{ jobSearch.isActive ? t('searchResults.active') : t('searchResults.paused') }}
               </span>
             </div>
             <div class="flex items-center">
               <i class="pi pi-calendar mr-2" />
-              Updated {{ formatDistanceToNow(jobSearch.lastUpdated, { addSuffix: true }) }}
+              {{ t('searchResults.updated') }}
+              {{ formatDistance(jobSearch.lastUpdated) }}
             </div>
           </div>
         </div>
@@ -96,7 +97,7 @@
           @click="onShowPreviousResults"
         >
           <i class="pi pi-history mr-2" />
-          Previous Results
+          {{ t('searchResults.previousResults') }}
         </button>
       </div>
 
@@ -114,12 +115,12 @@
           class="p-datatable-sm"
           row-hover
         >
-          <Column field="platform" header="Platform" sortable>
+          <Column :field="t('searchResults.platform')" header="Platform" sortable>
             <template #body="slotProps">
               <span class="font-semibold">{{ slotProps.data.platform }}</span>
             </template>
           </Column>
-          <Column field="url" header="URL">
+          <Column :field="t('searchResults.url')" header="URL">
             <template #body="slotProps">
               <a
                 :href="slotProps.data.url"
@@ -131,7 +132,7 @@
               </a>
             </template>
           </Column>
-          <Column field="timestamp" header="Timestamp" sortable>
+          <Column :field="t('searchResults.timestamp')" header="Timestamp" sortable>
             <template #body="slotProps">
               {{ formatDate(slotProps.data.timestamp) }}
             </template>
@@ -140,8 +141,7 @@
       </div>
       <div v-else class="rounded-lg border border-gray-700 bg-gray-800 p-2">
         <p class="text-center text-gray-400">
-          This job search has no results yet. Job postings matching your search criteria will be
-          available in this page soon. You will be notified when new results are available.
+          {{ t('searchResults.noResultsMessage') }}
         </p>
       </div>
     </main>
