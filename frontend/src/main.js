@@ -125,6 +125,19 @@ const Noir = definePreset(Nora, {
         },
       },
     },
+    checkbox: {
+      colorScheme: {
+        dark: {
+          root: {
+            background: '{gray.100}',
+            checkedBackground: '{gray.400}',
+            checkedHoverBackground: '{gray.400}',
+            checkedBorderColor: '{gray.400}',
+            checkedHoverBorderColor: '{gray.400}',
+          },
+        },
+      },
+    },
   },
 });
 

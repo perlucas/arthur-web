@@ -78,5 +78,34 @@
     "url": "URL",
     "timestamp": "Timestamp",
     "noResultsMessage": "This job search has no results yet. Job postings matching your search criteria will be available in this page soon. You will be notified when new results are available."
+  },
+  "notificationsView": {
+    "title": "Notifications",
+    "subtitle": "Manage your notifications and updates",
+    "bulkActions": {
+      "deleteAll": "Delete Selected",
+      "markAllRead": "Mark as Read",
+      "markAllUnread": "Mark as Unread",
+      "selected": "{count} selected"
+    },
+    "table": {
+      "timestamp": "Timestamp",
+      "message": "Message",
+      "actions": "Actions"
+    },
+    "tooltips": {
+      "markAsRead": "Mark as Read",
+      "markAsUnread": "Mark as Unread",
+      "delete": "Delete"
+    }
+  },
+  "paymentsView": {
+    "title": "Payments",
+    "subtitle": "View your payment history",
+    "table": {
+      "date": "Date",
+      "description": "Description",
+      "amount": "Amount"
+    }
   }
 }

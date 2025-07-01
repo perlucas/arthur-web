@@ -78,5 +78,34 @@
     "url": "URL",
     "timestamp": "Fecha y Hora",
     "noResultsMessage": "Esta búsqueda de empleo aún no tiene resultados. Las ofertas de trabajo que coincidan con tus criterios de búsqueda estarán disponibles en esta página pronto. Se te notificará cuando haya nuevos resultados disponibles."
+  },
+  "notificationsView": {
+    "title": "Notificaciones",
+    "subtitle": "Gestiona tus notificaciones y actualizaciones",
+    "bulkActions": {
+      "deleteAll": "Eliminar Seleccionados",
+      "markAllRead": "Marcar como Leídos",
+      "markAllUnread": "Marcar como No Leídos",
+      "selected": "{count} seleccionado | {count} seleccionados"
+    },
+    "table": {
+      "timestamp": "Fecha y Hora",
+      "message": "Mensaje",
+      "actions": "Acciones"
+    },
+    "tooltips": {
+      "markAsRead": "Marcar como Leído",
+      "markAsUnread": "Marcar como No Leído",
+      "delete": "Eliminar"
+    }
+  },
+  "paymentsView": {
+    "title": "Pagos",
+    "subtitle": "Accede a tu historial de pagos",
+    "table": {
+      "date": "Fecha",
+      "description": "Descripción",
+      "amount": "Monto"
+    }
   }
 }

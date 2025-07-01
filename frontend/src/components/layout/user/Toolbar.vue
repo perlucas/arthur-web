@@ -85,7 +85,7 @@
             :class="{ [colors.userMenuBg]: true }"
           >
             <RouterLink
-              to="/account"
+              to="/settings"
               class="block px-4 py-2 text-sm"
               :class="{
                 [colors.userMenuLinkText]: true,
@@ -96,7 +96,7 @@
               <i class="pi pi-user mr-2"></i>{{ t('toolbar.accountSettings') }}
             </RouterLink>
             <RouterLink
-              to="/billing"
+              to="/payments"
               class="block px-4 py-2 text-sm"
               :class="{
                 [colors.userMenuLinkText]: true,
