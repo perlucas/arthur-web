@@ -14,5 +14,31 @@ services:
     tty: true
     command: "/bin/sh"
 
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+    env_file:
+      - backend/.env
+    volumes:
+      - ./backend:/usr/src/app
+    ports:
+      - "80:80"
+    tty: true
+
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: arthur
+      MYSQL_DATABASE: arthur
+      MYSQL_USER: arthur
+      MYSQL_PASSWORD: arthur
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
 volumes:
   frontend_modules:
+  db_data:
