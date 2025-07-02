@@ -9,8 +9,14 @@
   import { useI18n } from 'vue-i18n';
 
   const { t } = useI18n();
-  const { notifications, totalRecords, loading, fetchNotifications, toggleRead, deleteNotification } =
-    useNotifications();
+  const {
+    notifications,
+    totalRecords,
+    loading,
+    fetchNotifications,
+    toggleRead,
+    deleteNotification,
+  } = useNotifications();
   const { formatDate } = useDateFns();
 
   const selectedNotifications = ref([]);
@@ -83,11 +89,16 @@
             {{ t('notificationsView.bulkActions.markAllUnread') }}
           </button>
         </div>
-        <span class="text-gray-400">{{ t('notificationsView.bulkActions.selected', { count: selectedNotifications.length }) }}</span>
+        <span class="text-gray-400">{{
+          t('notificationsView.bulkActions.selected', { count: selectedNotifications.length })
+        }}</span>
       </div>
 
       <!-- Table -->
-      <div class="rounded-lg border border-gray-700 bg-gray-800 shadow-lg p-4">
+      <div
+        v-if="notifications.length > 0"
+        class="rounded-lg border border-gray-700 bg-gray-800 shadow-lg p-4"
+      >
         <DataTable
           v-model:selection="selectedNotifications"
           :value="notifications"
@@ -119,7 +130,11 @@
                   :icon="data.isRead ? 'pi pi-eye-slash' : 'pi pi-eye'"
                   class="p-button-rounded p-button-text"
                   @click="handleToggleRead(data)"
-                  v-tooltip.top="data.isRead ? t('notificationsView.tooltips.markAsUnread') : t('notificationsView.tooltips.markAsRead')"
+                  v-tooltip.top="
+                    data.isRead
+                      ? t('notificationsView.tooltips.markAsUnread')
+                      : t('notificationsView.tooltips.markAsRead')
+                  "
                 />
                 <Button
                   icon="pi pi-trash"
@@ -131,6 +146,9 @@
             </template>
           </Column>
         </DataTable>
+      </div>
+      <div v-else class="rounded-lg border border-gray-700 bg-gray-800 p-2">
+        <p class="text-center text-gray-400">{{ t('notificationsView.empty') }}</p>
       </div>
     </main>
   </Layout>

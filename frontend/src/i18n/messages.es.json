@@ -77,7 +77,8 @@
     "platform": "Plataforma",
     "url": "URL",
     "timestamp": "Fecha y Hora",
-    "noResultsMessage": "Esta búsqueda de empleo aún no tiene resultados. Las ofertas de trabajo que coincidan con tus criterios de búsqueda estarán disponibles en esta página pronto. Se te notificará cuando haya nuevos resultados disponibles."
+    "noResultsMessage": "Esta búsqueda de empleo aún no tiene resultados. Las ofertas de trabajo que coincidan con tus criterios de búsqueda estarán disponibles en esta página pronto. Se te notificará cuando haya nuevos resultados disponibles.",
+    "exportCSV": "Exportar CSV"
   },
   "notificationsView": {
     "title": "Notificaciones",
@@ -97,7 +98,8 @@
       "markAsRead": "Marcar como Leído",
       "markAsUnread": "Marcar como No Leído",
       "delete": "Eliminar"
-    }
+    },
+    "empty": "No hay notificaciones."
   },
   "paymentsView": {
     "title": "Pagos",
@@ -106,6 +108,89 @@
       "date": "Fecha",
       "description": "Descripción",
       "amount": "Monto"
+    },
+    "empty": "Sin pagos."
+  },
+  "accountSettings": {
+    "title": "Configuración de la Cuenta",
+    "subtitle": "Gestiona las preferencias de tu cuenta y tu suscripción",
+    "general": {
+      "title": "General",
+      "emailNotifications": {
+        "label": "Enviar notificaciones por correo electrónico",
+        "description": "Recibe actualizaciones y alertas directamente en tu bandeja de entrada."
+      },
+      "language": {
+        "label": "Idioma",
+        "description": "Elige tu idioma de preferencia para la interfaz."
+      },
+      "saveChanges": "Guardar Cambios"
+    },
+    "security": {
+      "title": "Seguridad",
+      "newPassword": {
+        "label": "Nueva Contraseña",
+        "description": "Ingresa una nueva contraseña para asegurar tu cuenta."
+      },
+      "changePassword": "Cambiar Contraseña"
+    },
+    "subscription": {
+      "title": "Suscripción",
+      "currentPlan": "Plan Actual",
+      "expiresOn": "Vence el",
+      "upgradePlan": "Cambiar a Premium",
+      "renewSubscription": "Renovar Suscripción",
+      "plans": {
+        "demo": "Demo",
+        "premium": "Premium"
+      },
+      "pricingInfo": "Información sobre planes"
+    },
+    "deleteAccount": {
+      "title": "Eliminar Cuenta",
+      "label": "Eliminar permanentemente tu cuenta",
+      "description": "Esta acción es irreversible y eliminará todos tus datos.",
+      "deleteButton": "Eliminar Cuenta"
+    }
+  },
+  "changePasswordModal": {
+    "title": "Cambiar Contraseña",
+    "currentPassword": "Contraseña Actual",
+    "newPassword": "Nueva Contraseña",
+    "confirmNewPassword": "Confirmar Nueva Contraseña",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar"
+  },
+  "pricingInfoModal": {
+    "header": "Planes",
+    "closeButton": "Cerrar",
+    "demo": {
+      "title": "Demo",
+      "price": "Gratis",
+      "subtitle": "Para una prueba rápida",
+      "feature1": "Vence en 15 días",
+      "feature2": "Hasta 3 búsquedas de empleo",
+      "feature3": "1 búsqueda activa",
+      "feature4": "Sin exportación a CSV"
+    },
+    "premium": {
+      "title": "Premium",
+      "price": "$10",
+      "priceUnit": "/mes",
+      "subtitle": "Para profesionales",
+      "feature1": "Suscripción mensual",
+      "feature2": "Hasta 5 búsquedas de empleo",
+      "feature3": "3 búsquedas activas",
+      "feature4": "Exportación a CSV"
+    },
+    "custom": {
+      "title": "Personalizado",
+      "price": "Hablemos!",
+      "subtitle": "Para usuarios avanzados y empresas",
+      "feature1": "Facturación personalizada",
+      "feature2": "Búsquedas ilimitadas",
+      "feature3": "Búsquedas activas ilimitadas",
+      "feature4": "Features avanzadas (Sheets, XLSX, JSON, WebHooks)"
     }
   }
 }

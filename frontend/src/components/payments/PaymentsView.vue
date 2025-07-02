@@ -48,7 +48,10 @@
       </div>
 
       <!-- Table -->
-      <div class="rounded-lg border border-gray-700 bg-gray-800 shadow-lg p-4">
+      <div
+        v-if="payments.length > 0"
+        class="rounded-lg border border-gray-700 bg-gray-800 shadow-lg p-4"
+      >
         <DataTable
           :value="payments"
           :total-records="totalRecords"
@@ -76,6 +79,9 @@
             </template>
           </Column>
         </DataTable>
+      </div>
+      <div v-else class="rounded-lg border border-gray-700 bg-gray-800 p-2">
+        <p class="text-center text-gray-400">{{ t('paymentsView.empty') }}</p>
       </div>
     </main>
   </Layout>

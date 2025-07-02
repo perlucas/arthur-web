@@ -65,6 +65,8 @@
   const onShowPreviousResults = () => {
     previousResultsModalVisible.value = true;
   };
+
+  const isDemo = ref(false); // TODO: implement
 </script>
 
 <template>
@@ -98,6 +100,14 @@
         >
           <i class="pi pi-history mr-2" />
           {{ t('searchResults.previousResults') }}
+        </button>
+      </div>
+
+      <!-- Export as CSV  -->
+      <div v-if="results.length > 0 && !isDemo" class="flex justify-start my-4">
+        <button class="rounded-md bg-blue-600 hover:bg-blue-700 text-white px-4 py-2">
+          <i class="pi pi-download mr-2" />
+          {{ t('searchResults.exportCSV') }}
         </button>
       </div>
 

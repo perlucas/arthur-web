@@ -77,7 +77,8 @@
     "platform": "Platform",
     "url": "URL",
     "timestamp": "Timestamp",
-    "noResultsMessage": "This job search has no results yet. Job postings matching your search criteria will be available in this page soon. You will be notified when new results are available."
+    "noResultsMessage": "This job search has no results yet. Job postings matching your search criteria will be available in this page soon. You will be notified when new results are available.",
+    "exportCSV": "Export as CSV"
   },
   "notificationsView": {
     "title": "Notifications",
@@ -97,7 +98,8 @@
       "markAsRead": "Mark as Read",
       "markAsUnread": "Mark as Unread",
       "delete": "Delete"
-    }
+    },
+    "empty": "You don't have any notifications."
   },
   "paymentsView": {
     "title": "Payments",
@@ -106,6 +108,89 @@
       "date": "Date",
       "description": "Description",
       "amount": "Amount"
+    },
+    "empty": "No payments found."
+  },
+  "accountSettings": {
+    "title": "Account Settings",
+    "subtitle": "Manage your account preferences and subscription",
+    "general": {
+      "title": "General",
+      "emailNotifications": {
+        "label": "Send notifications via email",
+        "description": "Receive updates and alerts directly in your inbox."
+      },
+      "language": {
+        "label": "Language",
+        "description": "Choose your preferred language for the interface."
+      },
+      "saveChanges": "Save Changes"
+    },
+    "security": {
+      "title": "Security",
+      "newPassword": {
+        "label": "New Password",
+        "description": "Enter a new password to secure your account."
+      },
+      "changePassword": "Change Password"
+    },
+    "subscription": {
+      "title": "Subscription",
+      "currentPlan": "Current Plan",
+      "expiresOn": "Expires on",
+      "upgradePlan": "Upgrade Plan",
+      "renewSubscription": "Renew Subscription",
+      "plans": {
+        "demo": "Demo",
+        "premium": "Premium"
+      },
+      "pricingInfo": "See Pricing Information"
+    },
+    "deleteAccount": {
+      "title": "Delete Account",
+      "label": "Permanently delete your account",
+      "description": "This action is irreversible and will delete all your data.",
+      "deleteButton": "Delete Account"
+    }
+  },
+  "changePasswordModal": {
+    "title": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "pricingInfoModal": {
+    "header": "Pricing Plans",
+    "closeButton": "Close",
+    "demo": {
+      "title": "Demo",
+      "price": "Free",
+      "subtitle": "For a quick trial",
+      "feature1": "Expires in 15 days",
+      "feature2": "Up to 3 job searches",
+      "feature3": "1 active search",
+      "feature4": "No CSV Export"
+    },
+    "premium": {
+      "title": "Premium",
+      "price": "$10",
+      "priceUnit": "/month",
+      "subtitle": "For professionals",
+      "feature1": "Monthly subscription",
+      "feature2": "Up to 5 job searches",
+      "feature3": "3 active searches",
+      "feature4": "CSV Export"
+    },
+    "custom": {
+      "title": "Custom",
+      "price": "Let's talk!",
+      "subtitle": "For power users and companies",
+      "feature1": "Custom billing",
+      "feature2": "Unlimited searches",
+      "feature3": "Unlimited active searches",
+      "feature4": "Advanced exports (Sheets, XLSX, JSON, WebHooks)"
     }
   }
 }

@@ -1,6 +1,8 @@
 <script setup>
   import { useRoute } from 'vue-router';
   import { useI18n } from 'vue-i18n';
+  import { Badge } from 'primevue';
+  import { ref } from 'vue';
 
   const { t } = useI18n();
 
@@ -41,11 +43,13 @@
     activeLinkText: 'text-white',
     regularLinkText: 'text-gray-300',
   };
+
+  const notifications = ref(2); // TODO: Replace with actual notifications count
 </script>
 
 <template>
   <div
-    class="flex-grow-1 inset-y-0 left-0 min-w-64 z-50 shadow-lg transform transition-transform duration-300 ease-in-out"
+    class="inset-y-0 left-0 min-w-64 z-50 shadow-lg transform transition-transform duration-300 ease-in-out"
     :class="{ hidden: !sidebarOpen, [colors.sidebarBg]: true }"
   >
     <!-- Logo -->
@@ -71,6 +75,13 @@
         >
           <i :class="`pi ${item.icon} mr-3`"></i>
           {{ item.title }}
+
+          <Badge
+            v-if="item.path === '/notifications' && notifications > 0"
+            :value="notifications"
+            severity="info"
+            class="p-1 ml-2"
+          ></Badge>
         </RouterLink>
       </div>
     </nav>

@@ -85,7 +85,7 @@
             :class="{ [colors.userMenuBg]: true }"
           >
             <RouterLink
-              to="/settings"
+              to="/account-settings"
               class="block px-4 py-2 text-sm"
               :class="{
                 [colors.userMenuLinkText]: true,
