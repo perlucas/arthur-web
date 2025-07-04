@@ -13,4 +13,4 @@ class JobSearch(SQLModel, table=True):
     # Note: uses keys 'title_includes', 'title_excludes', 'description_includes', 'description_excludes'
     search_parameters: dict = Field(default={}, sa_column=Column(JSON))
     setting_send_email_notifications: bool = Field(default=True)
-    last_updated_at: datetime | None = Field(default=None)
+    updated_at: datetime | None = Field(default=None)

@@ -23,4 +23,5 @@ class User(SQLModel, table=True):
     setting_language: Language = Field(default=Language.en)
     plan_type: PlanType
     plan_expires_on: datetime
+    created_at: datetime
 
