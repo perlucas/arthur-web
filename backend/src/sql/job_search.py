@@ -7,6 +7,7 @@ class JobSearch(SQLModel, table=True):
     __tablename__ = 'job_search'
 
     id: int | None = Field(default=None, primary_key=True)
+    user_id: int
     name: str
     is_active: bool
     location: str

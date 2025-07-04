@@ -19,7 +19,7 @@ services:
       context: .
       dockerfile: docker/backend.Dockerfile
     env_file:
-      - backend/.env
+      - ./backend/.env
     volumes:
       - ./backend:/usr/src/app
     ports:
