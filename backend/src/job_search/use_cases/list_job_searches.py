@@ -1,11 +1,9 @@
-from pydantic import BaseModel
-from datetime import datetime
-
 from src.common.use_case import UseCase, UseCaseResult
 from src.common.json_presenter import JsonPresenter
 from src.sql.job_search import JobSearch
 from src.job_search.services.job_search_gateway import JobSearchGateway
 from src.auth.services.auth_service import AuthService
+from src.job_search.use_cases.common import JobSearchOutput
 
 class ListJobSearchesUseCase(UseCase):
 
@@ -22,17 +20,8 @@ class ListJobSearchesUseCase(UseCase):
         return UseCaseResult[list[JobSearch]](result=job_searches)
 
 
-class JobSearchDTO(BaseModel):
-    id: int
-    name: str
-    is_active: bool
-    location: str
-    search_parameters: dict
-    setting_send_email_notifications: bool
-    updated_at: datetime
 
-
-response_model = list[JobSearchDTO]
+response_model = list[JobSearchOutput]
 
 
 class ListJobSearchesPresenter(JsonPresenter):

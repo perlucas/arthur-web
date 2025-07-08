@@ -161,7 +161,7 @@
             <p class="text-gray-400 mt-1">{{ $t('dashboard.manageCampaigns') }}</p>
           </div>
           <button
-            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center transition-colors duration-200"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center transition-colors duration-200 cursor-pointer"
             @click="onCreateSearch"
           >
             <i class="pi pi-plus mr-2" />
@@ -237,7 +237,7 @@
             <!-- Action buttons -->
             <div class="flex space-x-2">
               <button
-                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center justify-center"
+                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center justify-center cursor-pointer"
                 @click="onViewSearchResults(search)"
               >
                 <i class="pi pi-eye mr-2" />
